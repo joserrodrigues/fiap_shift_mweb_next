@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Detail.module.css'
 import { Grid, Typography } from '@mui/material';
 
-const DetailView = ({ id, data, onBackClicked }) => {
+const DetailView = ({ id, data, onBackClicked, userInfo }) => {
 
     let message = null;
     if (data != null && data !== undefined) {
@@ -10,6 +10,24 @@ const DetailView = ({ id, data, onBackClicked }) => {
             <Typography gutterBottom variant="h6" className={styles.text} onClick={onBackClicked}>
                 {data}
             </Typography>
+        );
+    }
+
+    let userInfoJSX = null;
+    if (userInfo != null) {
+        userInfoJSX = (
+            <>
+                <Typography gutterBottom variant="h4" className={styles.text}>
+                    ID = {userInfo.id}
+                </Typography>
+                <Typography gutterBottom variant="h4" className={styles.text}>
+                    Nome = {userInfo.name}
+                </Typography>
+                <Typography gutterBottom variant="h4" className={styles.text}>
+                    Telefone = {userInfo.phone}
+                </Typography>
+            </>
+
         );
     }
     return (
@@ -21,16 +39,14 @@ const DetailView = ({ id, data, onBackClicked }) => {
             className={styles.container}
         >
             <Grid item xs={12} md={6} className={styles.main}>
-
                 <Typography gutterBottom variant="h2" className={styles.text}>
-                    Detail {id}
+                    Detail
                 </Typography>
-
+                {message}
+                {userInfoJSX}
                 <Typography gutterBottom variant="h6" className={styles.text} onClick={onBackClicked}>
                     Voltar
                 </Typography>
-
-                {message}
             </Grid>
         </Grid>
     );
